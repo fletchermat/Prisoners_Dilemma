@@ -189,14 +189,28 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
 
     elif player == 4:
         if getting_team_name:
-            return 'Enter Team Name Here'
+            return 'Big Man'
         else:
-            if len(opponent_history)==0: #It's the first round: collude
-                return 'c'
+            if len(opponent_history)==0: #It's the first round: betray
+                return 'b'
+            if len(opponent_history) >= 3 and opponent_history[-1] == 'b' and opponent_history[-2] == 'b' and opponent_history[-3] == 'b':
+                return 'b'
+            if len(opponent_history) >= 3 and opponent_history[-1] == 'c' and opponent_history[-2] == 'c' and opponent_history[-3] == 'c':
+                return 'b'
             elif history[-1]=='c' and opponent_history[-1]=='b':
                 return 'b' # betray if they were severely punished last time
+            elif len(opponent_history) >= 2 and history[-2] == 'c' and history[-1] == 'b' and opponent_history[-2] == 'b' and opponent_history[-1] == 'c':
+                return 'b'  # betray if opponent is vengeful
+            # elif len(opponent_history) >= 3 and history[-3] == 'c' and history[-2] == 'b' and history[-1] == 'b' and opponent_history[-3] == 'b' and opponent_history[-2] == 'c' and opponent_history[-1] == 'b':
+            #     return 'b'  #  if opponent is vengeful never get betrayed
+            #percent vengeful
+
             else:
-                return 'c' #otherwise collude
+                ameboa = random.randint(0, 1)
+                if ameboa == 0:
+                    return 'c'
+                else:
+                    return 'b'
 
 
 
