@@ -204,7 +204,8 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
             # elif len(opponent_history) >= 3 and history[-3] == 'c' and history[-2] == 'b' and history[-1] == 'b' and opponent_history[-3] == 'b' and opponent_history[-2] == 'c' and opponent_history[-1] == 'b':
             #     return 'b'  #  if opponent is vengeful never get betrayed
             #percent vengeful
-
+            elif len(opponent_history) >= 2 and history[-2] == 'b' and history[-1] == 'b' and opponent_history[-2] == 'b' and opponent_history[-1] == 'c':
+                return 'b'  # betray if opponent is vengeful
             else:
                 ameboa = random.randint(0, 1)
                 if ameboa == 0:
